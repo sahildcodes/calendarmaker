@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <title>Image-to-Calendar AI | Automated Screenshot to Google Calendar</title>
+  <meta name="description" content="Convert screenshots of assignments, syllabus schedules, and event flyers into verified Google Calendar events with OCR, conflict detection, and priority advising.">
+  
+  <!-- Mobile & PWA Optimization -->
+  <meta name="theme-color" content="#070b14">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Img2Cal">
+  <link rel="manifest" href="/manifest.json">
+
+  <!-- Modern Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <!-- Top Horizon Accent Light Beam (Linear/Vercel Aesthetic) -->
+  <div class="horizon-beam"></div>
+
+  <!-- Architectural Engineering Grid & Dot Matrix Layer -->
+  <div class="bg-grid-pattern"></div>
+
+  <!-- Physical Film Grain Micro-Texture -->
+  <div class="bg-grain"></div>
+
+  <!-- Dynamic Interactive Ambient Spotlight (Smoothly Glides on Mousemove & Touch) -->
+  <div class="ambient-spotlight" id="ambientSpotlight"></div>
+
+  <!-- Main App Shell -->
+  <div class="app-container">
+    <!-- Header -->
+    <header class="app-header">
+      <div class="header-brand">
+        <div class="brand-icon">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="4" width="18" height="18" rx="3" ry="3"></rect>
+            <line x1="16" y1="2" x2="16" y2="6"></line>
+            <line x1="8" y1="2" x2="8" y2="6"></line>
+            <line x1="3" y1="10" x2="21" y2="10"></line>
+            <path d="m9 16 2 2 4-4"></path>
+          </svg>
+        </div>
+        <div class="brand-text-wrap">
+          <h1 class="brand-title">Image-to-Calendar</h1>
+          <p class="brand-tagline">Screenshot to Google Calendar Pipeline</p>
+        </div>
+      </div>
+
+      <div class="header-actions">
+
+        <!-- Live Status Badge -->
+        <div class="status-badge" id="calendarStatusBadge">
+          <span class="status-dot"></span>
+          <span id="calendarStatusText">Loading status...</span>
+        </div>
+
+        <!-- Direct 1-Click Sign in with Google Button -->
+        <button class="btn btn-google btn-sm" id="btnConnectGoogle">
+          <svg width="16" height="16" viewBox="0 0 24 24">
+            <path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.66-5.17 3.66-9.17z"/>
+            <path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.1-6.72-4.93H1.26v3.15C3.25 21.37 7.32 24 12 24z"/>
+            <path fill="#FBBC05" d="M5.28 14.27c-.25-.72-.38-1.49-.38-2.27s.13-1.55.38-2.27V6.58H1.26C.46 8.16 0 9.94 0 12s.46 3.84 1.26 5.42l4.02-3.15z"/>
+            <path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.32 0 3.25 2.63 1.26 6.58l4.02 3.15c.95-2.83 3.6-4.98 6.72-4.98z"/>
+          </svg>
+          <span id="btnConnectGoogleText">Sign in with Google</span>
+        </button>
+
+        <!-- View Existing Calendar Events Button -->
+        <button class="btn btn-secondary btn-sm" id="btnOpenCalendarModal" title="View Active Calendar Events">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="4" width="18" height="18" rx="2"></rect>
+            <line x1="16" y1="2" x2="16" y2="6"></line>
+            <line x1="8" y1="2" x2="8" y2="6"></line>
+            <line x1="3" y1="10" x2="21" y2="10"></line>
+          </svg>
+          <span class="hide-mobile">Active Events</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Quick Presets Demo Bar -->
+    <section class="demo-presets-banner">
+      <div class="preset-label">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+        </svg>
+        <span>Instant Demo Samples:</span>
+      </div>
+      <div class="preset-buttons" id="sampleButtonsContainer">
+        <button class="btn-preset" data-sample="assignment_canvas.png">
+          <span class="preset-icon">📝</span> Canvas Due Date (Duplicate Check)
+        </button>
+        <button class="btn-preset" data-sample="event_flyer.png">
+          <span class="preset-icon">🚀</span> Hackathon Flyer (Conflict & Priority)
+        </button>
+        <button class="btn-preset" data-sample="schedule_courses.png">
+          <span class="preset-icon">📅</span> Course Schedule (Multi-Event)
+        </button>
+      </div>
+    </section>
+
+    <!-- Main Workspace Grid -->
+    <main class="workspace-grid">
+      <!-- Left Column: Upload & OCR Visualizer -->
+      <section class="panel upload-panel" id="uploadPanel">
+        <div class="panel-header">
+          <div class="panel-title-wrap">
+            <span class="step-num">1</span>
+            <div>
+              <h2 class="panel-title">Upload Screenshot or Photo</h2>
+              <p class="panel-subtitle">Canvas, syllabus, timetable, or event flyers</p>
+            </div>
+          </div>
+          <button class="btn-icon" id="btnClearImage" title="Clear image" style="display: none;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M18 6 6 18M6 6l12 12"></path>
+            </svg>
+          </button>
+        </div>
+
+        <!-- Native File Input (Visually Hidden, Accessible & Cross-Browser Safe) -->
+        <input type="file" id="fileInput" class="file-input" accept="image/*, .png, .jpg, .jpeg, .webp, .heic, .heif">
+
+        <!-- Dropzone / Mobile Camera Trigger (Native Label) -->
+        <label class="dropzone" id="dropzone" for="fileInput" tabindex="0" role="button" aria-label="Upload document image or screenshot">
+          <div class="dropzone-content" id="dropzonePlaceholder">
+            <div class="upload-icon-circle">
+              <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                <polyline points="17 8 12 3 7 8"></polyline>
+                <line x1="12" y1="3" x2="12" y2="15"></line>
+              </svg>
+            </div>
+            <h3 class="dropzone-title">Drag & drop or tap to select</h3>
+            <p class="dropzone-hint">Take photo • Paste with <kbd>⌘V</kbd> / <kbd>Ctrl</kbd>+<kbd>V</kbd></p>
+            <div class="file-types-pill">PNG, JPG, WEBP • Canvas, Handouts, Schedules</div>
+          </div>
+
+          <!-- Image Preview & Overlay -->
+          <div class="preview-container" id="previewContainer" style="display: none;">
+            <img id="imagePreview" alt="Uploaded Document Preview">
+            <div class="ocr-bounding-layer" id="ocrBoundingLayer"></div>
+            <!-- Dynamic High-Tech Laser Scanning Sweep -->
+            <div class="laser-scanner" id="laserScanner" style="display: none;">
+              <div class="laser-beam"></div>
+            </div>
+          </div>
+
+          <!-- Active Upload & OCR Processing Overlay inside Dropzone -->
+          <div class="upload-overlay" id="dropzoneUploadOverlay" style="display: none;">
+            <div class="upload-card">
+              <div class="upload-pulse-ring">
+                <div class="upload-ring-spinner"></div>
+                <div class="upload-ring-icon" id="dropzoneOverlayIcon">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                    <polyline points="17 8 12 3 7 8"></polyline>
+                    <line x1="12" y1="3" x2="12" y2="15"></line>
+                  </svg>
+                </div>
+              </div>
+              <div class="upload-card-info">
+                <div class="upload-card-name" id="dropzoneFileName">screenshot.png</div>
+                <div class="upload-card-size" id="dropzoneFileSize">0 KB</div>
+              </div>
+              <div class="upload-bar-wrap">
+                <div class="upload-bar-labels">
+                  <span id="dropzoneStageLabel">Uploading image...</span>
+                  <span class="upload-percent-number" id="dropzonePercentVal">0%</span>
+                </div>
+                <div class="upload-bar-track">
+                  <div class="upload-bar-fill" id="dropzoneProgressFill" style="width: 0%;"></div>
+                </div>
+              </div>
+              <p class="upload-card-hint" id="dropzoneStatusSubtext">Transferring file to server...</p>
+            </div>
+          </div>
+        </label>
+
+        <!-- OCR Inspection Tabs -->
+        <div class="ocr-inspector-card" id="ocrInspectorCard" style="display: none;">
+          <div class="ocr-inspector-header">
+            <div class="tabs">
+              <button class="tab-btn active" data-tab="normalized">Normalized Text</button>
+              <button class="tab-btn" data-tab="raw">Raw OCR</button>
+              <button class="tab-btn" data-tab="confidence">Confidence</button>
+            </div>
+            <div class="ocr-confidence-chip" id="ocrConfidenceChip">
+              <span id="ocrConfidenceValue">92%</span> Confidence
+            </div>
+          </div>
+
+          <div class="tab-pane active" id="paneNormalized">
+            <pre class="ocr-text-box" id="normalizedTextBox"></pre>
+          </div>
+          <div class="tab-pane" id="paneRaw">
+            <pre class="ocr-text-box" id="rawTextBox"></pre>
+          </div>
+          <div class="tab-pane" id="paneConfidence">
+            <div class="stats-grid">
+              <div class="stat-card">
+                <span class="stat-label">Avg Confidence</span>
+                <span class="stat-value" id="statAvgConf">0%</span>
+              </div>
+              <div class="stat-card">
+                <span class="stat-label">Detected Lines</span>
+                <span class="stat-value" id="statLinesCount">0</span>
+              </div>
+              <div class="stat-card">
+                <span class="stat-label">OCR Warnings</span>
+                <span class="stat-value warning-text" id="statUnreliableCount">0</span>
+              </div>
+            </div>
+            <div class="warnings-container" id="ocrWarningsContainer"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Right Column: User-Confirmation Workflow & Validation Workspace -->
+      <section class="panel validation-panel">
+        <div class="panel-header">
+          <div class="panel-title-wrap">
+            <span class="step-num">2</span>
+            <div>
+              <h2 class="panel-title">Validate & Confirm Events</h2>
+              <p class="panel-subtitle">Review ambiguities, schedule conflicts & priority advice</p>
+            </div>
+          </div>
+
+          <div class="validation-summary-badges" id="validationSummaryBadges">
+            <span class="badge badge-neutral" id="eventCountBadge">0 Events</span>
+          </div>
+        </div>
+
+        <!-- Dynamic Conflict Summary Alert Ribbon -->
+        <div class="conflict-status-ribbon" id="conflictStatusRibbon" style="display: none;">
+          <div class="ribbon-content">
+            <span class="ribbon-icon" id="ribbonIcon">🚨</span>
+            <div class="ribbon-text-wrap">
+              <span class="ribbon-title" id="conflictRibbonTitle">Schedule Overlap Detected</span>
+              <span class="ribbon-sub" id="conflictRibbonSub">Auto-shift or Keep Both using the action buttons below</span>
+            </div>
+          </div>
+          <button type="button" class="btn-ribbon-quick" id="btnRibbonAutoShiftAll" onclick="window.autoShiftAllConflicts()">
+            ⚡ Auto-Shift All (+1 Hr)
+          </button>
+        </div>
+
+        <!-- Active Events List Container -->
+        <div class="events-workspace" id="eventsWorkspace">
+          <!-- Empty State -->
+          <div class="empty-state" id="emptyState">
+            <div class="empty-state-graphic">
+              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <circle cx="12" cy="12" r="10"></circle>
+                <path d="m10 15 5-3-5-3v6Z"></path>
+              </svg>
+            </div>
+            <h3>No events processed yet</h3>
+            <p>Upload a screenshot, tap to snap a photo, or choose an instant demo sample above to extract and validate calendar entries.</p>
+          </div>
+
+          <!-- Loading State with Real-Time Upload Percentage -->
+          <div class="loading-state" id="loadingState" style="display: none;">
+            <div class="spinner-ring"></div>
+            <h3 id="loadingText">Processing screenshot...</h3>
+            
+            <div class="upload-progress-box" id="uploadProgressContainer" style="width: 100%; max-width: 320px; margin: 0.75rem auto 1rem; display: none;">
+              <div style="display: flex; justify-content: space-between; font-size: 0.85rem; margin-bottom: 6px;">
+                <span id="uploadProgressLabel" style="color: var(--text-muted); font-weight: 500;">Uploading Image...</span>
+                <span id="uploadProgressPercent" style="font-weight: 700; color: #38bdf8; font-family: var(--font-mono);">0%</span>
+              </div>
+              <div style="height: 8px; background: rgba(255,255,255,0.08); border-radius: 999px; overflow: hidden; border: 1px solid rgba(255,255,255,0.1);">
+                <div id="uploadProgressBar" style="height: 100%; width: 0%; background: linear-gradient(90deg, #0284c7, #38bdf8, #f97316); border-radius: 999px; transition: width 0.12s ease;"></div>
+              </div>
+            </div>
+
+            <p id="loadingSubtext">Extracting dates & times, checking conflicts & computing machine priority advice</p>
+          </div>
+
+          <!-- Dynamic Event Cards -->
+          <div class="event-cards-list" id="eventCardsList"></div>
+        </div>
+
+        <!-- Footer Action Bar -->
+        <div class="action-footer" id="actionFooter" style="display: none;">
+          <div class="footer-left">
+            <button class="btn btn-outline btn-sm" id="btnDownloadIcs">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                <polyline points="7 10 12 15 17 10"></polyline>
+                <line x1="12" y1="15" x2="12" y2="3"></line>
+              </svg>
+              Download .ICS
+            </button>
+          </div>
+
+          <div class="footer-right">
+            <button class="btn btn-primary btn-glow" id="btnSubmitCalendar">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path>
+                <polyline points="17 21 17 13 7 13 7 21"></polyline>
+                <polyline points="7 3 7 8 15 8"></polyline>
+              </svg>
+              <span id="btnSubmitText">Confirm & Sync to Google Calendar</span>
+            </button>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- =========================================================================
+       Google Calendar Setup & Authorization Modal
+       ========================================================================= -->
+  <div class="modal-backdrop" id="googleAuthModal" style="display: none;">
+    <div class="modal-dialog modal-auth">
+      <div class="modal-header">
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <div class="google-g-badge">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12.545,10.239v3.821h5.445c-0.712,2.315-2.647,3.972-5.445,3.972c-3.332,0-6.033-2.701-6.033-6.032s2.701-6.032,6.033-6.032c1.498,0,2.866,0.549,3.921,1.453l2.814-2.814C17.503,2.988,15.139,2,12.545,2C7.021,2,2.543,6.477,2.543,12s4.478,10,10.002,10c8.396,0,10.249-7.85,9.426-11.748L12.545,10.239z"/>
+            </svg>
+          </div>
+          <div>
+            <h3 class="modal-title">Connect Your Google Calendar</h3>
+            <p style="font-size:0.8rem; color:#94a3b8;">Enable live event syncing directly to your Google account</p>
+          </div>
+        </div>
+        <button class="btn-close" id="btnCloseGoogleAuthModal">✕</button>
+      </div>
+
+      <div class="modal-body">
+        <!-- Credentials Auto-Detection Banner -->
+        <div class="credentials-status-banner" id="credentialsDetectedBanner" style="display: none; padding: 12px 16px; background: rgba(16, 185, 129, 0.12); border: 1px solid rgba(16, 185, 129, 0.3); border-radius: 8px; margin-bottom: 14px;">
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <span style="font-size: 1.2rem; color: #10b981;">✓</span>
+            <div>
+              <div style="font-weight: 700; color: #10b981; font-size: 0.9rem;">Credentials Detected: <span id="credSourceName">credentials.json</span></div>
+              <p style="font-size: 0.8rem; color: #cbd5e1; margin-top: 2px;">Your Google Client configuration is ready. Just click <strong>"Sign in with Google"</strong> below!</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="credentials-placement-notice" id="credentialsMissingNotice" style="padding: 12px 16px; background: rgba(245, 158, 11, 0.1); border: 1px solid rgba(245, 158, 11, 0.25); border-radius: 8px; margin-bottom: 16px; font-size: 0.82rem; line-height: 1.5;">
+          <strong style="color: #fbbf24;">📁 Want 1-Click Sign-In?</strong> Drop your downloaded Google JSON file into this project folder:<br>
+          <code style="background: #060911; color: #38bdf8; padding: 2px 6px; border-radius: 4px; display: inline-block; margin-top: 4px;">&lt;project-root&gt;/credentials.json</code><br>
+          <span style="color: #94a3b8; font-size: 0.76rem;">The app auto-detects it so all you have to do is click "Sign in with Google"!</span>
+        </div>
+
+        <!-- Step by step wizard -->
+        <div class="auth-stepper">
+          <!-- Step 1 -->
+          <div class="auth-step-item">
+            <div class="step-badge">1</div>
+            <div class="step-content">
+              <h4>Get Free Google Cloud OAuth Credentials</h4>
+              <p>Go to <a href="https://console.cloud.google.com/apis/credentials" target="_blank" rel="noopener" class="external-link">Google Cloud Console → APIs & Credentials ↗</a> and create an <strong>OAuth 2.0 Client ID</strong> (Application type: <em>Web application</em>). Make sure <strong>Google Calendar API</strong> is enabled.</p>
+            </div>
+          </div>
+
+          <!-- Step 2 -->
+          <div class="auth-step-item">
+            <div class="step-badge">2</div>
+            <div class="step-content">
+              <h4>Set Authorized Redirect URI</h4>
+              <p>In your Google Cloud Console Client ID settings, add this exact URL under <strong>Authorized redirect URIs</strong>:</p>
+              <div class="redirect-uri-box">
+                <code id="displayRedirectUri">http://localhost:8080/api/calendar/oauth-callback</code>
+                <button class="btn-copy" id="btnCopyRedirectUri" title="Copy URI">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                  </svg>
+                  Copy
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Step 3 -->
+          <div class="auth-step-item">
+            <div class="step-badge">3</div>
+            <div class="step-content">
+              <h4>1-Click Google Authorization</h4>
+              <p style="font-size: 0.85rem; color: #cbd5e1;">Click <strong>"Sign in with Google"</strong> below to securely connect. Credentials are safely configured on the backend server—no technical keys or secret uploads required by end users.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Connection Status & Disconnect Section -->
+        <div class="connected-profile-box" id="connectedProfileBox" style="display: none;">
+          <div class="profile-info">
+            <div class="status-dot"></div>
+            <div>
+              <span style="font-size: 0.75rem; color: #94a3b8; display: block;">Currently Authenticated</span>
+              <strong id="connectedUserEmail" style="color: #10b981; font-size: 0.95rem;">user@gmail.com</strong>
+            </div>
+          </div>
+          <button class="btn btn-outline btn-sm" id="btnDisconnectGoogle">
+            Disconnect Account
+          </button>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn btn-secondary" id="btnCloseGoogleAuthModalBtn">Cancel</button>
+        <button class="btn btn-primary btn-glow" id="btnStartGoogleOAuth">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12.545,10.239v3.821h5.445c-0.712,2.315-2.647,3.972-5.445,3.972c-3.332,0-6.033-2.701-6.033-6.032s2.701-6.032,6.033-6.032c1.498,0,2.866,0.549,3.921,1.453l2.814-2.814C17.503,2.988,15.139,2,12.545,2C7.021,2,2.543,6.477,2.543,12s4.478,10,10.002,10c8.396,0,10.249-7.85,9.426-11.748L12.545,10.239z"/>
+          </svg>
+          Sign in with Google
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       Calendar Events Viewer Modal
+       ========================================================================= -->
+  <div class="modal-backdrop" id="calendarModal" style="display: none;">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h3 class="modal-title">Active Calendar Schedule</h3>
+        <button class="btn-close" id="btnCloseCalendarModal">✕</button>
+      </div>
+      <div class="modal-body">
+        <div class="calendar-env-info">
+          <p>Active Google Calendar events used for <strong>real-time conflict detection</strong>, <strong>duplicate prevention</strong>, and <strong>priority advising</strong>.</p>
+        </div>
+        <div class="calendar-events-table-wrap">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Title</th>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Category</th>
+                <th>Priority</th>
+              </tr>
+            </thead>
+            <tbody id="calendarTableBody"></tbody>
+          </table>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" id="btnCloseCalendarModalBtn">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       Submission Success Modal (With Live Google Calendar Links!)
+       ========================================================================= -->
+  <div class="modal-backdrop" id="successModal" style="display: none;">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-header text-center">
+        <div class="success-icon-badge">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <polyline points="20 6 9 17 4 12"></polyline>
+          </svg>
+        </div>
+        <h3 class="modal-title">Calendar Sync Complete!</h3>
+      </div>
+      <div class="modal-body text-center">
+        <p id="successMessage">Your events have been validated and pushed to your Google Calendar.</p>
+        <div class="synced-events-list" id="syncedEventsList"></div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-primary w-full" id="btnCloseSuccessModal">Done</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <!-- App Footer with Legal & Creator Links -->
+  <footer style="text-align: center; padding: 2rem 1rem; font-size: 0.82rem; color: var(--text-muted); border-top: 1px solid var(--border-color); margin-top: 3rem;">
+    <span>Image-to-Calendar &copy; 2026</span>
+    <span style="margin: 0 0.5rem;">&bull;</span>
+    <a href="/privacy" style="color: var(--text-dim); text-decoration: none; transition: color 0.2s;" onmouseover="this.style.color='#38bdf8'" onmouseout="this.style.color='var(--text-dim)'">Privacy Policy</a>
+    <span style="margin: 0 0.5rem;">&bull;</span>
+    <a href="/terms" style="color: var(--text-dim); text-decoration: none; transition: color 0.2s;" onmouseover="this.style.color='#38bdf8'" onmouseout="this.style.color='var(--text-dim)'">Terms of Service</a>
+    <span style="margin: 0 0.5rem;">&bull;</span>
+    <a href="/admin" style="color: var(--text-muted); text-decoration: none; transition: color 0.2s;" onmouseover="this.style.color='#93c5fd'" onmouseout="this.style.color='var(--text-muted)'">🔐 Creator Insights</a>
+  </footer>
+
+  <script src="/app.js?v=2.1"></script>
+</body>
+</html>

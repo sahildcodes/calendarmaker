@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Privacy Policy | Image-to-Calendar</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .legal-container {
+      max-width: 860px;
+      margin: 2.5rem auto;
+      padding: 0 1.5rem 4rem;
+    }
+    .legal-card {
+      background: rgba(11, 18, 34, 0.85);
+      border: 1px solid rgba(56, 189, 248, 0.18);
+      border-radius: var(--radius-lg);
+      padding: 2.5rem;
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.45);
+      color: var(--text-main);
+      line-height: 1.75;
+    }
+    .legal-nav {
+      margin-bottom: 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .legal-nav a {
+      color: #38bdf8;
+      text-decoration: none;
+      font-size: 0.9rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    .legal-nav a:hover {
+      color: #f97316;
+    }
+    .legal-badge {
+      display: inline-block;
+      padding: 4px 10px;
+      background: rgba(56, 189, 248, 0.12);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      border-radius: 9999px;
+      color: #38bdf8;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+    h1.legal-title {
+      font-size: 2.2rem;
+      font-weight: 800;
+      margin: 0.75rem 0 0.5rem;
+      background: linear-gradient(135deg, #ffffff 0%, #cbd5e1 50%, #94a3b8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .last-updated {
+      font-size: 0.85rem;
+      color: var(--text-dim);
+      margin-bottom: 2rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    h2.legal-sec {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: #f1f5f9;
+      margin: 2rem 0 0.75rem;
+      padding-left: 0.75rem;
+      border-left: 3px solid #38bdf8;
+    }
+    h3.legal-subsec {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: #cbd5e1;
+      margin: 1.25rem 0 0.5rem;
+    }
+    p, ul, ol {
+      color: #94a3b8;
+      font-size: 0.95rem;
+      margin-bottom: 1rem;
+    }
+    ul, ol {
+      padding-left: 1.5rem;
+    }
+    li {
+      margin-bottom: 0.4rem;
+    }
+    .callout-box {
+      background: rgba(2, 132, 199, 0.08);
+      border: 1px solid rgba(56, 189, 248, 0.35);
+      border-radius: var(--radius-md);
+      padding: 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .callout-box strong {
+      color: #38bdf8;
+    }
+    .highlight-box {
+      background: rgba(249, 115, 22, 0.08);
+      border: 1px solid rgba(249, 115, 22, 0.35);
+      border-radius: var(--radius-md);
+      padding: 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .highlight-box strong {
+      color: #f97316;
+    }
+    code {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.85rem;
+      background: rgba(0, 0, 0, 0.4);
+      padding: 2px 6px;
+      border-radius: 4px;
+      color: #e2e8f0;
+    }
+  </style>
+</head>
+<body>
+  <div class="horizon-beam"></div>
+  <div class="bg-grid-pattern"></div>
+  <div class="bg-grain"></div>
+
+  <div class="legal-container">
+    <div class="legal-nav">
+      <a href="/">&larr; Back to Image-to-Calendar</a>
+      <div>
+        <span class="legal-badge">Official Policy</span>
+      </div>
+    </div>
+
+    <article class="legal-card">
+      <span class="legal-badge">Legal Compliance</span>
+      <h1 class="legal-title">Privacy Policy</h1>
+      <div class="last-updated">Last Updated: September 13, 2026 &bull; Effective Immediately</div>
+
+      <p>
+        Welcome to <strong>Image-to-Calendar</strong> ("we", "our", or "the Application"). We are dedicated to respecting and protecting your privacy. This Privacy Policy outlines what information we collect, how that information is utilized, and the safeguards we maintain to keep your personal data and calendar entries private and secure.
+      </p>
+
+      <div class="callout-box">
+        <strong>Executive Summary:</strong> We process your uploaded schedule images strictly in memory to detect dates and times. We do <em>not</em> sell, rent, monetize, or share your personal data with third-party advertisers or data brokers. Your Google Calendar tokens are encrypted at rest and used exclusively to synchronize the events you explicitly approve.
+      </div>
+
+      <h2 class="legal-sec">1. Information We Collect</h2>
+      <p>We collect and process only the minimal data necessary to provide calendar extraction and synchronization services:</p>
+      
+      <h3 class="legal-subsec">A. Information You Provide Directly</h3>
+      <ul>
+        <li>
+          <strong>Uploaded Images & Documents:</strong> Screenshots of course syllabi, event flyers, Canvas assignments, or timetables that you upload to the Application for optical character recognition (OCR).
+        </li>
+        <li>
+          <strong>Event Details & Edits:</strong> Event titles, start and end dates, times, locations, and priority scores that you create, verify, or modify in the validation interface.
+        </li>
+      </ul>
+
+      <h3 class="legal-subsec">B. Google Account Information via OAuth 2.0</h3>
+      <p>When you choose to connect your Google account, Google prompts you to grant specific permissions. Upon authorization, we receive:</p>
+      <ul>
+        <li><strong>Basic Profile & Email Address:</strong> Your email address and basic public profile identifier (via the <code>openid</code> and <code>userinfo.email</code> scopes) to identify your session and display your connected account in the UI.</li>
+        <li><strong>OAuth Authentication Tokens:</strong> Temporary access and refresh tokens that permit our server to communicate with the Google Calendar API on your behalf.</li>
+      </ul>
+
+      <h3 class="legal-subsec">C. Technical & Diagnostic Logs</h3>
+      <p>
+        When you access the Application, our server may record standard diagnostic logs (such as IP address, user agent, timestamps, and upload counts) strictly to enforce rate limiting, prevent Denial of Service (DoS) attacks, and maintain service health. These logs are not sold or linked to third-party tracking profiles.
+      </p>
+
+      <h2 class="legal-sec">2. How We Use Your Information</h2>
+      <p>We use the data collected strictly for the following operational purposes:</p>
+      <ol>
+        <li><strong>OCR Text Extraction:</strong> Processing your uploaded flyer or syllabus with optical character recognition to extract event dates, times, and descriptions.</li>
+        <li><strong>Schedule Conflict Analysis:</strong> Comparing newly extracted events against existing events in your calendar to warn you of overlaps and provide intelligent auto-shift suggestions.</li>
+        <li><strong>Calendar Synchronization:</strong> Creating new calendar entries in your personal Google Calendar (via <code>https://www.googleapis.com/auth/calendar.events</code>) strictly upon your explicit confirmation.</li>
+        <li><strong>iCalendar (.ics) Export:</strong> Generating standard <code>.ics</code> files for offline download to Apple Calendar, Outlook, or other calendar clients.</li>
+      </ol>
+
+      <div class="highlight-box">
+        <strong>Google API Services User Data Policy Compliance:</strong><br>
+        Image-to-Calendar's use and transfer to any other app of information received from Google APIs adheres to the 
+        <a href="https://developers.google.com/terms/api-services-user-data-policy" target="_blank" rel="noopener noreferrer" style="color: #f97316; font-weight: 600;">Google API Services User Data Policy</a>, 
+        including the <strong>Limited Use</strong> requirements.
+      </div>
+
+      <h2 class="legal-sec">3. Google Calendar API Permissions & Limited Use</h2>
+      <p>
+        Our integration with Google Calendar adheres strictly to the Principle of Least Privilege:
+      </p>
+      <ul>
+        <li><strong>Narrow Scopes:</strong> We request only the <code>https://www.googleapis.com/auth/calendar.events</code> scope (to create and check events you approve) and <code>openid/userinfo.email</code>. We do <em>not</em> request full read/write access to your drive, contacts, or Gmail.</li>
+        <li><strong>No Human Inspection:</strong> No human administrator reads your private calendar entries or uploaded screenshots unless you explicitly submit a support request with reproduction files.</li>
+        <li><strong>No AI Model Training:</strong> Your Google Calendar data, user profiles, and schedule images are never used to train public machine learning models or sold to third-party AI companies.</li>
+        <li><strong>No Advertising:</strong> We do not serve third-party ads and do not use your calendar contents or profile data for targeted marketing.</li>
+      </ul>
+
+      <h2 class="legal-sec">4. Data Storage, Retention & Security</h2>
+      <ul>
+        <li><strong>Ephemeral Image Processing:</strong> Uploaded images are held temporarily during OCR extraction and are not retained in long-term permanent storage.</li>
+        <li><strong>Encrypted OAuth Tokens:</strong> All user refresh tokens and authentication credentials stored on our server are encrypted at rest using industry-standard AES / Fernet cryptography.</li>
+        <li><strong>Signed Cookie Sessions:</strong> Browser sessions utilize cryptographically signed, secure HTTP-only cookies protected by HMAC-SHA256 signatures to prevent tampering and session hijacking.</li>
+        <li><strong>Transport Layer Security:</strong> All data transmitted between your browser, our application, and Google's servers is encrypted in transit using modern HTTPS / TLS 1.3.</li>
+      </ul>
+
+      <h2 class="legal-sec">5. How to Revoke Access & Delete Data</h2>
+      <p>You maintain complete control over your data at all times:</p>
+      <ul>
+        <li><strong>In-App Disconnect:</strong> You can disconnect your Google Calendar at any time by clicking your account pill in the application header and selecting "Disconnect". This immediately invalidates and deletes your active session on our server.</li>
+        <li><strong>Google Security Settings:</strong> You can permanently revoke Image-to-Calendar's access to your Google account at any time by visiting <a href="https://myaccount.google.com/permissions" target="_blank" rel="noopener noreferrer" style="color: #38bdf8;">Google Account Permissions</a>.</li>
+        <li><strong>Data Deletion Requests:</strong> If you wish to request immediate purging of all cached tokens or server log entries related to your session, contact us at the address provided below.</li>
+      </ul>
+
+      <h2 class="legal-sec">6. Third-Party Services</h2>
+      <p>The Application interacts with the following external service providers:</p>
+      <ul>
+        <li><strong>Google APIs (Google LLC):</strong> For authentication (OAuth 2.0) and calendar synchronization.</li>
+        <li><strong>Render (Render Services, Inc.):</strong> For secure, containerized cloud infrastructure hosting.</li>
+      </ul>
+      <p>We do not use third-party analytics trackers, Facebook pixels, or tracking cookies.</p>
+
+      <h2 class="legal-sec">7. Children's Privacy</h2>
+      <p>
+        The Application is not directed toward children under the age of 13. We do not knowingly collect or solicit personal information from children.
+      </p>
+
+      <h2 class="legal-sec">8. Changes to This Privacy Policy</h2>
+      <p>
+        We may update this Privacy Policy periodically to reflect enhancements to our features or regulatory requirements. Any modifications will be posted directly to this page with an updated "Last Updated" timestamp. Continued use of the Application after revisions constitutes acceptance of the updated terms.
+      </p>
+
+      <h2 class="legal-sec">9. Contact Information</h2>
+      <p>
+        If you have questions, feedback, or privacy-related requests regarding this Privacy Policy, please reach out:
+      </p>
+      <ul>
+        <li><strong>Project:</strong> Image-to-Calendar (ChronoSync)</li>
+        <li><strong>Repository:</strong> <a href="https://github.com/sahildcodes/calendarmaker" target="_blank" rel="noopener noreferrer" style="color: #38bdf8;">github.com/sahildcodes/calendarmaker</a></li>
+        <li><strong>Web Application:</strong> <a href="https://calendarmaker.onrender.com" style="color: #38bdf8;">https://calendarmaker.onrender.com</a></li>
+      </ul>
+    </article>
+
+    <div style="text-align: center; margin-top: 2rem; font-size: 0.82rem; color: var(--text-muted);">
+      <a href="/terms" style="color: var(--text-dim); text-decoration: none; margin: 0 10px;">Terms of Service</a> &bull;
+      <a href="/" style="color: var(--text-dim); text-decoration: none; margin: 0 10px;">Return to App</a>
+    </div>
+  </div>
+</body>
+</html>

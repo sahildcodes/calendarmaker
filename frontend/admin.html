@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Creator Insights & Metrics | ChronoSync</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .admin-container {
+      max-width: 1100px;
+      margin: 2rem auto;
+      padding: 0 1.5rem;
+    }
+    .metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.25rem;
+      margin-bottom: 2rem;
+    }
+    .metric-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem;
+      backdrop-filter: blur(16px);
+      box-shadow: var(--shadow-card);
+      transition: transform 0.2s, border-color 0.2s;
+    }
+    .metric-card:hover {
+      transform: translateY(-2px);
+      border-color: var(--primary-light);
+    }
+    .metric-val {
+      font-size: 2.25rem;
+      font-weight: 800;
+      font-family: var(--font-mono);
+      background: linear-gradient(135deg, #fff, #93c5fd);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin: 0.5rem 0;
+    }
+    .metric-title {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .activity-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1rem;
+      font-size: 0.9rem;
+    }
+    .activity-table th, .activity-table td {
+      padding: 0.85rem 1rem;
+      text-align: left;
+      border-bottom: 1px solid var(--border-color);
+    }
+    .activity-table th {
+      color: var(--text-muted);
+      font-weight: 600;
+      text-transform: uppercase;
+      font-size: 0.75rem;
+    }
+    .auth-gate {
+      max-width: 420px;
+      margin: 5rem auto;
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 2.5rem;
+      text-align: center;
+      box-shadow: var(--shadow-card);
+    }
+    .admin-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header class="app-header">
+    <div class="header-inner">
+      <div class="logo-area">
+        <a href="/" style="display: flex; align-items: center; gap: 0.75rem; text-decoration: none; color: inherit;">
+          <div class="logo-icon">⚡</div>
+          <span class="logo-text">ChronoSync</span>
+        </a>
+        <span class="badge" style="background: rgba(147, 51, 234, 0.2); color: #c084fc; border: 1px solid rgba(147, 51, 234, 0.4);">
+          Creator Insights
+        </span>
+      </div>
+      <div class="header-actions">
+        <a href="/" class="btn btn-secondary btn-sm">← Back to App</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Auth Gate (Password Prompt) -->
+  <div id="authGate" class="admin-container">
+    <div class="auth-gate">
+      <div style="font-size: 2.5rem; margin-bottom: 1rem;">🔐</div>
+      <h2 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 0.5rem;">Creator Access</h2>
+      <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem;">
+        Enter your admin password to access live user counts and scan metrics.
+      </p>
+      <form id="loginForm" onsubmit="handleLogin(event)">
+        <input 
+          type="password" 
+          id="adminPwd" 
+          class="form-control" 
+          placeholder="Enter admin password"
+          style="margin-bottom: 1rem; text-align: center; font-family: var(--font-mono);"
+          required
+        >
+        <button type="submit" class="btn btn-primary" style="width: 100%;">
+          Unlock Insights
+        </button>
+        <div id="authError" style="color: #f87171; font-size: 0.85rem; margin-top: 0.75rem; display: none;">
+          Incorrect password. Check your ADMIN_PASSWORD env setting.
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Main Dashboard Content -->
+  <main id="adminDashboard" class="admin-container" style="display: none;">
+    <div class="admin-header">
+      <div>
+        <h1 style="font-size: 1.85rem; font-weight: 800; letter-spacing: -0.02em;">Creator Insights & User Metrics</h1>
+        <p style="color: var(--text-muted); font-size: 0.95rem;">Live telemetry tracking usage, OCR scans, and Google Calendar syncs.</p>
+      </div>
+      <div style="display: flex; gap: 0.75rem;">
+        <button onclick="fetchMetrics()" class="btn btn-secondary btn-sm" id="refreshBtn">
+          🔄 Refresh
+        </button>
+        <button onclick="logoutAdmin()" class="btn btn-danger btn-sm">
+          Lock
+        </button>
+      </div>
+    </div>
+
+    <!-- Metrics Cards Grid -->
+    <div class="metrics-grid">
+      <div class="metric-card">
+        <div class="metric-title">👥 Unique Visitors</div>
+        <div class="metric-val" id="valVisitors">0</div>
+        <div style="font-size: 0.8rem; color: var(--text-muted);">Unique user sessions initiated</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-title">📸 Images Scanned</div>
+        <div class="metric-val" id="valScans">0</div>
+        <div style="font-size: 0.8rem; color: var(--text-muted);">Screenshots processed through OCR</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-title">📅 Events Extracted</div>
+        <div class="metric-val" id="valExtracted">0</div>
+        <div style="font-size: 0.8rem; color: var(--text-muted);">Assignments, exams & schedules parsed</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-title">⚡ Events Synced</div>
+        <div class="metric-val" id="valSynced">0</div>
+        <div style="font-size: 0.8rem; color: var(--text-muted);">Added to live Google Calendar / Sandbox</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-title">⚠️ Conflicts Flagged</div>
+        <div class="metric-val" id="valConflicts">0</div>
+        <div style="font-size: 0.8rem; color: var(--text-muted);">Overlaps caught by Priority Advisor</div>
+      </div>
+    </div>
+
+    <!-- Real-time Activity Log -->
+    <div class="metric-card">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+        <h3 style="font-size: 1.15rem; font-weight: 700;">🕒 Recent Activity Log</h3>
+        <span class="badge" style="background: rgba(37, 99, 235, 0.2); color: #60a5fa;">Last 30 Actions</span>
+      </div>
+      <div style="overflow-x: auto;">
+        <table class="activity-table">
+          <thead>
+            <tr>
+              <th>Timestamp</th>
+              <th>Action Type</th>
+              <th>Details</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody id="activityBody">
+            <tr>
+              <td colspan="4" style="text-align: center; color: var(--text-muted); padding: 2rem;">No activity recorded yet.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    let adminPassword = '';
+
+    async function handleLogin(e) {
+      e.preventDefault();
+      const pwd = document.getElementById('adminPwd').value.trim();
+      attemptLoad(pwd);
+    }
+
+    async function attemptLoad(pwd) {
+      try {
+        const res = await fetch('/api/admin/metrics', {
+          headers: { 'x-admin-password': pwd }
+        });
+        if (res.ok) {
+          adminPassword = pwd;
+          const data = await res.json();
+          renderDashboard(data);
+          document.getElementById('authGate').style.display = 'none';
+          document.getElementById('adminDashboard').style.display = 'block';
+          document.getElementById('authError').style.display = 'none';
+        } else {
+          document.getElementById('authError').style.display = 'block';
+        }
+      } catch (err) {
+        document.getElementById('authError').textContent = 'Network error connecting to backend.';
+        document.getElementById('authError').style.display = 'block';
+      }
+    }
+
+    async function fetchMetrics() {
+      if (!adminPassword) {
+        logoutAdmin();
+        return;
+      }
+      try {
+        const btn = document.getElementById('refreshBtn');
+        btn.textContent = '⏳ Fetching...';
+        const res = await fetch('/api/admin/metrics', {
+          headers: { 'x-admin-password': adminPassword }
+        });
+        if (res.ok) {
+          const data = await res.json();
+          renderDashboard(data);
+        }
+        btn.textContent = '🔄 Refresh';
+      } catch (err) {
+        console.error(err);
+      }
+    }
+
+    function renderDashboard(data) {
+      document.getElementById('valVisitors').textContent = data.total_unique_visitors || 0;
+      document.getElementById('valScans').textContent = data.total_images_processed || 0;
+      document.getElementById('valExtracted').textContent = data.total_events_extracted || 0;
+      document.getElementById('valSynced').textContent = data.total_events_synced || 0;
+      document.getElementById('valConflicts').textContent = data.total_conflicts_flagged || 0;
+
+      const tbody = document.getElementById('activityBody');
+      if (!data.recent_activities || data.recent_activities.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="4" style="text-align: center; color: var(--text-muted); padding: 2rem;">No activity recorded yet. Scan an image to see live telemetry!</td></tr>';
+        return;
+      }
+
+      tbody.innerHTML = data.recent_activities.map(a => {
+        let details = '';
+        let badge = '<span class="badge badge-success">Processed</span>';
+        if (a.type === 'IMAGE_SCAN') {
+          details = `Parsed <strong>${a.events_found}</strong> events (Avg Conf: ${a.confidence}%, Conflicts: ${a.conflicts})`;
+          badge = '<span class="badge" style="background:rgba(59,130,246,0.2); color:#60a5fa;">OCR Scan</span>';
+        } else if (a.type.startsWith('CALENDAR_SYNC')) {
+          details = `Synced <strong>${a.events_synced}</strong> event(s) to ${a.type.includes('GOOGLE') ? 'Google Calendar' : 'Sandbox'}`;
+          badge = '<span class="badge badge-success">Calendar Sync</span>';
+        }
+        return `
+          <tr>
+            <td style="font-family: var(--font-mono); font-size: 0.82rem; color: var(--text-muted);">${a.timestamp}</td>
+            <td style="font-weight: 600;">${a.type}</td>
+            <td>${details}</td>
+            <td>${badge}</td>
+          </tr>
+        `;
+      }).join('');
+    }
+
+    function logoutAdmin() {
+      adminPassword = '';
+      document.getElementById('adminPwd').value = '';
+      document.getElementById('adminDashboard').style.display = 'none';
+      document.getElementById('authGate').style.display = 'block';
+    }
+  </script>
+</body>
+</html>

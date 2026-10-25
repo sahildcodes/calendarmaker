@@ -1,0 +1,40 @@
+# Python & Environment
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.env
+.env.*
+!.env.example
+venv/
+env/
+.venv/
+
+# Sensitive Google Credentials & Tokens
+credentials.json
+client_secret*.json
+data/credentials.json
+data/client_secret*.json
+data/tokens/
+data/profiles/
+data/token.json
+data/user_profile.json
+data/metrics.json
+data/.secret_key
+.secret_key
+data/*.enc
+data/tokens/*.enc
+data/profiles/*.enc
+data/runtime/
+*.pem
+*.key
+*.p12
+*.pfx
+service-account*.json
+service_account*.json
+google-credentials*.json
+
+# System & IDE
+.DS_Store
+.vscode/
+.idea/

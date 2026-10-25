@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Terms of Service | Image-to-Calendar</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .legal-container {
+      max-width: 860px;
+      margin: 2.5rem auto;
+      padding: 0 1.5rem 4rem;
+    }
+
+    .legal-card {
+      background: rgba(11, 18, 34, 0.85);
+      border: 1px solid rgba(56, 189, 248, 0.18);
+      border-radius: var(--radius-lg);
+      padding: 2.5rem;
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.45);
+      color: var(--text-main);
+      line-height: 1.75;
+    }
+
+    .legal-nav {
+      margin-bottom: 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .legal-nav a {
+      color: #38bdf8;
+      text-decoration: none;
+      font-size: 0.9rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    .legal-nav a:hover {
+      color: #f97316;
+    }
+
+    .legal-badge {
+      display: inline-block;
+      padding: 4px 10px;
+      background: rgba(56, 189, 248, 0.12);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      border-radius: 9999px;
+      color: #38bdf8;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    h1.legal-title {
+      font-size: 2.2rem;
+      font-weight: 800;
+      margin: 0.75rem 0 0.5rem;
+      background: linear-gradient(135deg, #ffffff 0%, #cbd5e1 50%, #94a3b8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .last-updated {
+      font-size: 0.85rem;
+      color: var(--text-dim);
+      margin-bottom: 2rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    h2.legal-sec {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: #f1f5f9;
+      margin: 2rem 0 0.75rem;
+      padding-left: 0.75rem;
+      border-left: 3px solid #f97316;
+    }
+
+    h3.legal-subsec {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: #cbd5e1;
+      margin: 1.25rem 0 0.5rem;
+    }
+
+    p,
+    ul,
+    ol {
+      color: #94a3b8;
+      font-size: 0.95rem;
+      margin-bottom: 1rem;
+    }
+
+    ul,
+    ol {
+      padding-left: 1.5rem;
+    }
+
+    li {
+      margin-bottom: 0.4rem;
+    }
+
+    .callout-box {
+      background: rgba(2, 132, 199, 0.08);
+      border: 1px solid rgba(56, 189, 248, 0.35);
+      border-radius: var(--radius-md);
+      padding: 1.25rem;
+      margin: 1.5rem 0;
+    }
+
+    .callout-box strong {
+      color: #38bdf8;
+    }
+
+    .warning-box {
+      background: rgba(239, 68, 68, 0.08);
+      border: 1px solid rgba(239, 68, 68, 0.3);
+      border-radius: var(--radius-md);
+      padding: 1.25rem;
+      margin: 1.5rem 0;
+    }
+
+    .warning-box strong {
+      color: #ef4444;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="horizon-beam"></div>
+  <div class="bg-grid-pattern"></div>
+  <div class="bg-grain"></div>
+
+  <div class="legal-container">
+    <div class="legal-nav">
+      <a href="/">&larr; Back to Image-to-Calendar</a>
+      <div>
+        <span class="legal-badge">Terms of Use</span>
+      </div>
+    </div>
+
+    <article class="legal-card">
+      <span class="legal-badge">Agreement</span>
+      <h1 class="legal-title">Terms of Service</h1>
+      <div class="last-updated">Last Updated: September 13, 2026 &bull; Effective Immediately</div>
+
+      <p>
+        These Terms of Service ("Terms") constitute a legally binding agreement between you ("User", "you", or "your")
+        and <strong>Image-to-Calendar</strong> ("we", "us", or "the Application"). By visiting, uploading images to, or
+        utilizing our calendar parsing and synchronization services, you agree to comply with and be bound by these
+        Terms.
+      </p>
+
+      <div class="callout-box">
+        <strong>Overview:</strong> Image-to-Calendar provides automated OCR and event extraction tools to convert
+        screenshots into Google Calendar events and .ics downloads. You retain 100% ownership of your files and calendar
+        data. You agree to use the service responsibly and not submit abusive or malicious payloads.
+      </div>
+
+      <h2 class="legal-sec">1. Description of Service</h2>
+      <p>
+        Image-to-Calendar provides an automated software platform that:
+      </p>
+      <ul>
+        <li>Scans user-uploaded screenshots (such as syllabi, event flyers, course timetables, and Canvas deadlines)
+          using optical character recognition (OCR).</li>
+        <li>Parses textual data to identify event titles, start/end dates, times, locations, and priority levels.</li>
+        <li>Evaluates schedule conflicts and duplicate entries against your existing calendar.</li>
+        <li>Generates standard <code>.ics</code> files and directly synchronizes confirmed entries into your connected
+          Google Calendar via official Google APIs.</li>
+      </ul>
+
+      <h2 class="legal-sec">2. User Responsibilities & Acceptable Use</h2>
+      <p>When using Image-to-Calendar, you agree not to:</p>
+      <ul>
+        <li>Upload files that contain malicious code, decompression bombs (zip bombs / pixel bombs), viruses, or
+          exploits designed to harm or disrupt our servers.</li>
+        <li>Bypass or attempt to circumvent rate limits, security filters, or authentication tokens.</li>
+        <li>Upload documents containing classified, proprietary, or unlawful materials that you do not have permission
+          or authorization to handle.</li>
+        <li>Use automated scrapers, bots, or scripts to flood or abuse the API services.</li>
+      </ul>
+
+      <h2 class="legal-sec">3. User Content & Intellectual Property</h2>
+      <p>
+        <strong>Your Content Belongs to You:</strong> You retain all intellectual property rights and ownership over any
+        screenshots, documents, and schedule entries you upload or generate. Image-to-Calendar does not claim any
+        copyright or ownership over your content.
+      </p>
+      <p>
+        <strong>License to Process:</strong> By uploading documents, you grant us solely the temporary, technical
+        license necessary to process the file in memory, execute OCR parsing, and dispatch requests to Google Calendar
+        on your behalf.
+      </p>
+
+      <h2 class="legal-sec">4. Accuracy of OCR & User Verification</h2>
+      <div class="warning-box">
+        <strong>Important Notice Regarding OCR Accuracy:</strong> While our OCR pipeline employs advanced image
+        sharpening and multi-pass recognition heuristics, computer vision and automated parsing can occasionally
+        misinterpret handwritten text, low-resolution flyers, or ambiguous date formats.
+      </div>
+      <p>
+        <strong>You are solely responsible for reviewing and confirming the parsed event date, time, and location before
+          clicking "Confirm & Sync Events".</strong> Image-to-Calendar is not responsible for missed appointments,
+        academic deadlines, or scheduling conflicts resulting from unverified automated extractions.
+      </p>
+
+      <h2 class="legal-sec">5. Third-Party Services & Google Integration</h2>
+      <p>
+        Our service integrates with external APIs, primarily <strong>Google Calendar</strong> and <strong>Google OAuth
+          2.0</strong>. Your use of Google features is subject to the <a href="https://policies.google.com/terms"
+          target="_blank" rel="noopener noreferrer" style="color: #38bdf8;">Google Terms of Service</a> and Google API
+        policies.
+      </p>
+      <p>
+        We are not responsible for downtime, outages, API rate limit throttles, or account suspensions initiated by
+        Google.
+      </p>
+
+      <h2 class="legal-sec">6. Disclaimer of Warranties</h2>
+      <p>
+        THE SERVICE IS PROVIDED ON AN "AS IS" AND "AS AVAILABLE" BASIS, WITHOUT WARRANTIES OF ANY KIND, EITHER EXPRESS
+        OR IMPLIED, INCLUDING BUT NOT LIMITED TO WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE,
+        NON-INFRINGEMENT, OR UNINTERRUPTED AVAILABILITY.
+      </p>
+
+      <h2 class="legal-sec">7. Limitation of Liability</h2>
+      <p>
+        TO THE MAXIMUM EXTENT PERMITTED BY LAW, IN NO EVENT SHALL IMAGE-TO-CALENDAR, ITS DEVELOPERS, OR AFFILIATES BE
+        LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, OR PUNITIVE DAMAGES, INCLUDING BUT NOT LIMITED TO
+        LOSS OF DATA, MISSED DEADLINES, FINANCIAL LOSS, OR SERVICE INTERRUPTION, ARISING OUT OF OR IN CONNECTION WITH
+        YOUR USE OF THE SERVICE.
+      </p>
+
+      <h2 class="legal-sec">8. Termination & Revocation</h2>
+      <p>
+        You may terminate your usage at any time by simply ceasing to use the Application and disconnecting your Google
+        Calendar session. We reserve the right to restrict or terminate access to any IP address or user that violates
+        these Terms or engages in abusive server requests.
+      </p>
+
+      <h2 class="legal-sec">9. Governing Law & Modifications</h2>
+      <p>
+        These Terms shall be governed by and construed in accordance with the laws of the United States. We reserve the
+        right to modify or replace these Terms at any time. Continued use of the Application following any updates
+        constitutes acceptance of the modified Terms.
+      </p>
+
+      <h2 class="legal-sec">10. Contact Us</h2>
+      <p>
+        For inquiries regarding these Terms of Service, please contact us:
+      </p>
+      <ul>
+        <li><strong>Project:</strong> Image-to-Calendar</li>
+        <li><strong>Source Repository:</strong> <a href="https://github.com/sahildcodes/calendarmaker" target="_blank"
+            rel="noopener noreferrer" style="color: #38bdf8;">github.com/sahildcodes/calendarmaker</a></li>
+        <li><strong>Live Site:</strong> <a href="https://calendarmaker.onrender.com"
+            style="color: #38bdf8;">https://calendarmaker.onrender.com</a></li>
+      </ul>
+    </article>
+
+    <div style="text-align: center; margin-top: 2rem; font-size: 0.82rem; color: var(--text-muted);">
+      <a href="/privacy" style="color: var(--text-dim); text-decoration: none; margin: 0 10px;">Privacy Policy</a>
+      &bull;
+      <a href="/" style="color: var(--text-dim); text-decoration: none; margin: 0 10px;">Return to App</a>
+    </div>
+  </div>
+</body>
+
+</html>

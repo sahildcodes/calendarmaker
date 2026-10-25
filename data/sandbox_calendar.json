@@ -1,0 +1,86 @@
+[
+  {
+    "id": "cal_evt_1",
+    "title": "CS 101 Midterm Examination",
+    "start_date": "2026-10-24",
+    "end_date": "2026-10-24",
+    "start_time": "14:00",
+    "end_time": "16:00",
+    "category": "Exam",
+    "priority_score": 9,
+    "location": "Science Center Hall B",
+    "description": "Comprehensive Midterm covering dynamic programming, graph algorithms, and trees."
+  },
+  {
+    "id": "cal_evt_2",
+    "title": "Weekly Board Game Social",
+    "start_date": "2026-10-24",
+    "end_date": "2026-10-24",
+    "start_time": "15:00",
+    "end_time": "17:00",
+    "category": "Social",
+    "priority_score": 3,
+    "location": "Student Union 2nd Floor",
+    "description": "Casual board game night with friends."
+  },
+  {
+    "id": "cal_evt_3",
+    "title": "CS 101 Homework 4: Dynamic Programming",
+    "start_date": "2026-10-24",
+    "end_date": "2026-10-24",
+    "start_time": "23:59",
+    "end_time": "23:59",
+    "category": "Assignment",
+    "priority_score": 8,
+    "location": "Canvas Submission Portal",
+    "description": "Submit homework zip to Canvas before midnight."
+  },
+  {
+    "id": "cal_evt_4",
+    "title": "Campus Hackathon 2026",
+    "start_date": "2026-11-14",
+    "end_date": "2026-11-14",
+    "start_time": "18:00",
+    "end_time": "21:30",
+    "category": "Event",
+    "priority_score": 6,
+    "location": "Student Union Grand Ballroom",
+    "description": "Hackathon opening keynote and team matchmaking."
+  },
+  {
+    "id": "cal_evt_5",
+    "title": "Campus Recreation Shift",
+    "start_date": "2026-11-14",
+    "end_date": "2026-11-14",
+    "start_time": "19:00",
+    "end_time": "22:00",
+    "category": "Work",
+    "priority_score": 7,
+    "location": "Fitness Center Desk",
+    "description": "Work shift - equipment monitoring."
+  },
+  {
+    "id": "sandbox_1789324326_6",
+    "title": "Test Algorithms Presentation",
+    "start_date": "2026-10-25",
+    "end_date": "2026-10-25",
+    "start_time": "11:00",
+    "end_time": "12:00",
+    "location": "Turing Hall 104",
+    "description": "Final algorithms presentation to class",
+    "category": "Class",
+    "priority_score": 6
+  },
+  {
+    "id": "sandbox_1789324684_7",
+    "title": "CS 101 - Homework 4: Dynamic Programming & Recursion",
+    "start_date": "2026-10-24",
+    "end_date": "2026-10-24",
+    "start_time": "23:59",
+    "end_time": "00:59",
+    "location": "Canvas",
+    "description": "Homework 4: Dynamic Programming & Recursion\nDue: Friday, Oct 24, 2026 at 11:59 PM Points 100 Weight 20% of final grade\nAssignment Instructions & Rubric:\nB Implement bottom-up dynamic programming solution for the knapsack problem.\nB Location: Submitsingle ziparchive to Canvas portal\nB Academic Int...",
+    "category": "Assignment",
+    "priority_score": 9
+  }
+]
