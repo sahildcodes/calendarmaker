@@ -154,7 +154,7 @@ def enforce_event_limits(event: Dict[str, Any]) -> Dict[str, Any]:
 # 6. RFC 5545 iCalendar Escaping
 # ---------------------------------------------------------------------------
 def escape_ics_text(text: Optional[str]) -> str:
-    """
+    r"""
     Escapes text according to RFC 5545 specifications:
     - Backslash \ -> \\
     - Semicolon ; -> \;

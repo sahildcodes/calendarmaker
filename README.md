@@ -1,8 +1,9 @@
-# Image-to-Calendar Application
+# CalendarMaker
 
-> **Full-Stack Application converting screenshots of assignments, syllabus schedules, and event announcements into Google Calendar events using Python, FastAPI, JavaScript, OCR, and Google Calendar API.**
+> A full-stack OCR pipeline that turns schedule screenshots into reviewable Google Calendar events and portable ICS files.
 
-![Python](https://img.shields.io/badge/Python-3.14-blue.svg)
+[![CI](https://github.com/sahildcodes/calendarmaker/actions/workflows/ci.yml/badge.svg)](https://github.com/sahildcodes/calendarmaker/actions/workflows/ci.yml)
+![Python](https://img.shields.io/badge/Python-3.11%2B-blue.svg)
 ![FastAPI](https://img.shields.io/badge/FastAPI-0.110+-green.svg)
 ![OCR](https://img.shields.io/badge/OCR-Tesseract_5.5%20%2F%20Vision-orange.svg)
 ![Google Calendar](https://img.shields.io/badge/Google%20Calendar%20API-v3-blue.svg)
@@ -10,7 +11,7 @@
 
 ---
 
-## Resume Alignment & Technical Features
+## Core capabilities
 
 ### 1. Manual Calendar Entry Automation
 - Converts screenshots of Canvas/Blackboard assignments, academic schedules, and flyers directly into structured calendar events.
@@ -60,7 +61,10 @@ calendermaker/
 │   ├── event_flyer.png       # Hackathon keynote flyer (conflict & priority advisory demo)
 │   └── schedule_courses.png  # University course timetable (multi-event demo)
 ├── tests/
-│   └── test_pipeline.py     # Comprehensive automated pytest test suite
+│   ├── test_pipeline.py     # Parsing, conflict detection & export tests
+│   └── test_security.py     # Upload, session, isolation & injection tests
+├── .github/workflows/ci.yml # Reproducible GitHub Actions test pipeline
+├── SECURITY.md              # Private vulnerability reporting guidance
 └── requirements.txt         # Python project dependencies
 ```
 
@@ -75,7 +79,7 @@ pip install -r requirements.txt
 
 ### 2. Run Automated Tests
 ```bash
-PYTHONPATH=. pytest tests/test_pipeline.py -v
+pytest -q
 ```
 
 ### 3. Start the Server
